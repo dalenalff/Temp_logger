@@ -8,6 +8,7 @@
 // C++ code
 //
 
+const String logfile = "tsensor.log";
 RTC_DS1307 rtc;
 OneWire ow(4);
 
@@ -68,6 +69,15 @@ void loop() {
   int16_t tempRead = sp_data[1] << 8 | sp_data[0];
 
   float tempCelcius = tempRead / 16.0; // divide by 2¨**4 =16 for four digits after the comma
+  
   Serial.println(tempCelcius);
-  delay(5000);
+  printOutput(getISOtime());
+  printOutput("; ");
+  printOutput((String) millis());
+  printOutput("; ");
+  printOutput(registration_number);
+  printOutput("; ");
+  printOutputln((String)tempCelcius);
+  
+  delay(1000);
   }
